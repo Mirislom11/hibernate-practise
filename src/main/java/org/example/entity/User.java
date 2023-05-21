@@ -1,12 +1,14 @@
 package org.example.entity;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import lombok.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.time.LocalDate;
+import org.example.converter.BirthDateConverter;
+import org.example.customType.BirthDay;
+import org.example.customType.MyJson;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 
 @Getter
 @Setter
@@ -25,8 +27,13 @@ public class User {
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
+    @Convert(converter = BirthDateConverter.class)
     @Column(name = "birth_date")
-    private LocalDate birthDate;
+    private BirthDay birthDate;
     @Column(name = "age")
     private Integer age;
+
+    @Column(name = "info")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private MyJson info;
 }

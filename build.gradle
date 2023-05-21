@@ -20,6 +20,7 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:6.2.2.Final'
     implementation 'javax.persistence:javax.persistence-api:2.2'
 
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 

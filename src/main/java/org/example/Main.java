@@ -2,6 +2,9 @@ package org.example;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
+import org.example.converter.BirthDateConverter;
+import org.example.customType.BirthDay;
+import org.example.customType.MyJson;
 import org.example.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,22 +21,27 @@ import java.util.stream.Collectors;
 public class Main {
     public static void main(String[] args) {
         Configuration configuration = new Configuration();
+        configuration.addAttributeConverter(new BirthDateConverter(), true);
         configuration.configure();
-
         try (SessionFactory sessionFactory = configuration.buildSessionFactory();
              Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
+
+            MyJson myJson = new MyJson();
+            myJson.setLongProp(1l);
+            myJson.setStringProp("Mirislom");
             User user = User.builder()
                     .age(20)
-                    .username("@Mirislom_01")
+                    .username("@Mirislom_03")
                     .firstName("Mirislom")
                     .lastName("Zoirov")
-                    .birthDate(LocalDate.of(2003, 11, 6))
+                    .birthDate(new BirthDay(LocalDate.of(2003, 11, 6)))
+                    .info(myJson)
                     .build();
-            /*session.save(user);*/
+            session.save(user);
             transaction.commit();
 
-            String sql = """
+            /*String sql = """
                     insert into\s
                     %s
                     (%s)
@@ -56,7 +64,7 @@ public class Main {
                     .map(field -> "?")
                     .collect(Collectors.joining(", "));
 
-            System.out.println(sql.formatted(tableName, columnNames, columnValues));
+            System.out.println(sql.formatted(tableName, columnNames, columnValues));*/
         }
     }
 }
