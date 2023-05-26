@@ -3,6 +3,7 @@ package org.example.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -24,7 +25,12 @@ public class Company {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "company")
+    @OrderBy(value = "username DESC, lastName ASC")
     private List<User> users;
+    @Builder.Default
+    @ElementCollection
+    @CollectionTable(name = "company_locale", joinColumns = @JoinColumn(name = "company_id"))
+    private List<LocaleInfo> locales = new ArrayList<>();
 
     public void addUsersToCompany (List<User> users) {
         this.setUsers(users);

@@ -9,16 +9,15 @@ import org.example.customType.MyJson;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"profile", "company", "chats"})
-@EqualsAndHashCode(of = {"username", "firstname", "lastname", "birthDate", "age", "info", })
+@ToString(exclude = {"profile", "company", "userChats"})
+@EqualsAndHashCode(of = {"username", "firstName", "lastName", "birthDate", "age", "info", })
 @Builder
 @Entity
 @Table(name = "users", schema = "public")
@@ -50,17 +49,28 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Profile profile;
 
-    @ManyToMany()
+    /*@ManyToMany()
     @JoinTable(
             name = "users_chat",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "chat_id")
     )
-    private Set<Chat> chats = new HashSet<>();
+    private Set<Chat> chats = new HashSet<>();*/
 
-    public void addChat(Chat chat) {
+   @Builder.Default
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+   private List<UserChat> userChats = new ArrayList<>();
+
+
+    /*public void addChat(Chat chat) {
         chats.add(chat);
-        chat.getUsers().add(this);
-    }
+        if (Objects.isNull(chat.getUsers())){
+            Set<User> users = new HashSet<>();
+            users.add(this);
+            chat.setUsers(users);
+        }else {
+            chat.getUsers().add(this);
+        }
+    }*/
 
 }

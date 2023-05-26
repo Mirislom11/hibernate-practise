@@ -19,7 +19,7 @@ public class Profile {
     @SequenceGenerator(name = "sequenceGenerator", sequenceName = "sequence_generator")
     private Long id;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
     @Column(name = "street")

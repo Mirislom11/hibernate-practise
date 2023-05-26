@@ -17,6 +17,7 @@
     <mapping class="org.example.entity.Company"/>
     <mapping class="org.example.entity.Profile"/>
     <mapping class="org.example.entity.Chat"/>
+    <mapping class="org.example.entity.UserChat"/>
 
     <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
