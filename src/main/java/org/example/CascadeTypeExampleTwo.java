@@ -14,7 +14,7 @@ public class CascadeTypeExampleTwo {
     public static void main(String[] args) {
         try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
              Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+            /*Transaction transaction = session.beginTransaction();
             Company company = new Company();
             company.setName("Amazon");
             session.persist(company);
@@ -27,7 +27,7 @@ public class CascadeTypeExampleTwo {
                     .company(company)
                     .build();
             session.persist(user);
-            transaction.commit();
+            transaction.commit();*/
         }
     }
 }

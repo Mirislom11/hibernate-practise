@@ -18,7 +18,7 @@ public class CompanyService {
     }
 
     public static void createCompanyWithUsers () {
-        Company company = Company.builder()
+        /*Company company = Company.builder()
                 .name("Brio Group")
                 .build();
         User user1 = User.builder()
@@ -41,6 +41,6 @@ public class CompanyService {
             Transaction transaction = session.beginTransaction();
             session.persist(company);
             transaction.commit();
-        }
+        }*/
     }
 }

@@ -10,7 +10,7 @@ import org.hibernate.cfg.Configuration;
 
 public class EntityLifeCycleExample {
     public static void main(String[] args) {
-        User user = User.builder()
+        /*User user = User.builder()
                 .firstName("Ivan")
                 .lastName("Ivanov")
                 .username("ivan4@gmail.com")
@@ -28,6 +28,6 @@ public class EntityLifeCycleExample {
                 session.merge(user);
                 transaction.commit();
             }
-        }
+        }*/
     }
 }

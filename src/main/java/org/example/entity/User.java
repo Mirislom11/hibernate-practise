@@ -3,6 +3,7 @@ package org.example.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import lombok.experimental.SuperBuilder;
 import org.example.converter.BirthDateConverter;
 import org.example.customType.BirthDay;
 import org.example.customType.MyJson;
@@ -14,18 +15,15 @@ import java.util.*;
 
 @Getter
 @Setter
+@ToString(exclude = {"profile", "company", "userChats"})
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"profile", "company", "userChats"})
-@EqualsAndHashCode(of = {"username", "firstName", "lastName", "birthDate", "age", "info", })
-@Builder
+@EqualsAndHashCode(of = {"username", "firstName", "lastName", "birthDate", "age", "info", }, callSuper = true)
 @Entity
 @Table(name = "users", schema = "public")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator", sequenceName = "sequence_generator")
-    private Long id;
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SuperBuilder
+public abstract class User extends BaseEntity<Long>{
 
     @Column(name = "username")
     private String username;

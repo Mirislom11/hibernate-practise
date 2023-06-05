@@ -12,4 +12,9 @@ public class HibernateUtil {
         configuration.configure();
         return configuration.buildSessionFactory();
     }
+
+    public static Configuration buildTestContainerConfiguration () {
+        Configuration configuration = new Configuration();
+        return configuration;
+    }
 }
