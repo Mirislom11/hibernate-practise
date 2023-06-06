@@ -14,7 +14,7 @@ import org.example.entity.enumerations.Language;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+
 public class Programmer extends User{
 
     @Enumerated(EnumType.STRING)

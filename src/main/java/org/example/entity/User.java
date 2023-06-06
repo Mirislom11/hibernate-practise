@@ -21,9 +21,8 @@ import java.util.*;
 @EqualsAndHashCode(of = {"username", "firstName", "lastName", "birthDate", "age", "info", }, callSuper = true)
 @Entity
 @Table(name = "users", schema = "public")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SuperBuilder
-public abstract class User extends BaseEntity<Long>{
+@Builder
+public class User extends BaseEntity<Long>{
 
     @Column(name = "username")
     private String username;

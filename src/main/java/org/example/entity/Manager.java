@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder
+
 public class Manager extends User{
     private String projectName;
 }
